@@ -9,7 +9,7 @@ function Header() {
         <header className="bg-center bg-no-repeat bg-top header relative">
             <nav>
                 <Link
-                    className="block pb-8 pt-20 text-6xl text-center text-pink-400"
+                    className="block pb-8 pt-28 text-7xl text-center text-pink-400"
                     to="/"
                 >
                     NailScape
@@ -23,7 +23,7 @@ function Header() {
                     <div className="bg-gray-50 h-1 opacity-80 w-1/2"></div>
                 </button>
                 {dropdownOpen && (
-                    <ul className="dropdown mx-4 text-gray-700 text-3xl text-center">
+                    <ul className="dropdown mb-6 mx-4 text-gray-700 text-3xl text-center">
                         <li className="border-b border-gray-50">
                             <Link className="block py-4" to="/blog">
                                 Blog

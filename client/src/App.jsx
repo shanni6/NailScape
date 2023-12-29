@@ -1,5 +1,6 @@
 import "./App.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Blog from "./pages/Blog/Blog";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
@@ -7,11 +8,12 @@ function App() {
     return (
         <BrowserRouter>
             <Header />
-            <Routes>
-                <Route element={<>Home</>} path="/" />
-
-            </Routes>
-            
+            <main>
+                <Routes>
+                    <Route element={<Navigate to="/blog" />} path="/" />
+                    <Route element={<Blog />} path="/blog" />
+                </Routes>
+            </main>
             <Footer />
         </BrowserRouter>
     );
