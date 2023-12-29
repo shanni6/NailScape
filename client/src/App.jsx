@@ -8,7 +8,7 @@ function App() {
     return (
         <BrowserRouter>
             <Header />
-            <main>
+            <main className="max-w-2xl mx-auto">
                 <Routes>
                     <Route element={<Navigate to="/blog" />} path="/" />
                     <Route element={<Blog />} path="/blog" />
