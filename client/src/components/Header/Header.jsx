@@ -1,5 +1,5 @@
 import "./Header.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 function Header() {
@@ -25,37 +25,75 @@ function Header() {
                 {dropdownOpen && (
                     <ul className="bg-[url('assets/images/background-dropdown.jpg')] mb-6 md:hidden mx-4 text-gray-700 text-3xl text-center">
                         <li className="border-b border-gray-50">
-                            <Link className="block py-4 underline" to="/blogs">
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "block py-4 underline"
+                                        : "block py-4"
+                                }
+                                end
+                                to="/blogs"
+                            >
                                 Blogs
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="border-b border-gray-50">
-                            <Link className="block py-4" to="/about">
-                                About
-                            </Link>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "block py-4 underline"
+                                        : "block py-4"
+                                }
+                                to="/blogs/create"
+                            >
+                                Create
+                            </NavLink>
                         </li>
                         <li>
-                            <Link className="block py-4" to="/contact">
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "block py-4 underline"
+                                        : "block py-4"
+                                }
+                                to="/contact"
+                            >
                                 Contact
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 )}
                 <ul className="bg-[center_top_0.35rem] bg-[url('assets/images/background-navigation-left.png'),_url('assets/images/background-navigation-right.png')] bg-center bg-contain bg-no-repeat gap-12 hidden justify-center mb-6 md:flex mx-4 text-gray-700 text-3xl text-center">
                     <li>
-                        <Link className="block underline py-4" to="/blogs">
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? "block py-4 underline" : "block py-4"
+                            }
+                            end
+                            to="/blogs"
+                        >
                             Blogs
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link className="block py-4" to="/about">
-                            About
-                        </Link>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? "block py-4 underline" : "block py-4"
+                            }
+                            to="/blogs/create"
+                        >
+                            Create
+                        </NavLink>
                     </li>
                     <li>
-                        <Link className="block py-4" to="/contact">
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? "block py-4 underline" : "block py-4"
+                            }
+                            to="/contact"
+                        >
                             Contact
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
