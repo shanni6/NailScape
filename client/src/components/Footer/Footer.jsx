@@ -3,7 +3,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 function Footer() {
     return (
-        <footer className="bg-[url('assets/images/background-footer.png')] bg-bottom bg-center bg-contain bg-no-repeat flex flex-col gap-8 md:pb-28 lg:pb-36 md:pt-16 pb-20 pt-16">
+        <footer className="bg-[url('assets/images/background-footer.png')] bg-bottom bg-contain bg-no-repeat flex flex-col gap-8 md:pb-28 lg:pb-36 md:pt-16 pb-20 pt-16">
             <ul className="flex gap-4 justify-center text-2xl text-gray-50">
                 <li>
                     <a

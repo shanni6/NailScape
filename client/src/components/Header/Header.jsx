@@ -23,10 +23,10 @@ function Header() {
                     <div className="bg-gray-50 h-1 opacity-80 w-1/2"></div>
                 </button>
                 {dropdownOpen && (
-                    <ul className="bg-[url('assets/images/background-dropdown.jpg')] mb-6 mx-4 text-gray-700 text-3xl text-center">
+                    <ul className="bg-[url('assets/images/background-dropdown.jpg')] mb-6 md:hidden mx-4 text-gray-700 text-3xl text-center">
                         <li className="border-b border-gray-50">
-                            <Link className="block py-4 underline" to="/blog">
-                                Blog
+                            <Link className="block py-4 underline" to="/blogs">
+                                Blogs
                             </Link>
                         </li>
                         <li className="border-b border-gray-50">
@@ -43,8 +43,8 @@ function Header() {
                 )}
                 <ul className="bg-[center_top_0.35rem] bg-[url('assets/images/background-navigation-left.png'),_url('assets/images/background-navigation-right.png')] bg-center bg-contain bg-no-repeat gap-12 hidden justify-center mb-6 md:flex mx-4 text-gray-700 text-3xl text-center">
                     <li>
-                        <Link className="block underline py-4" to="/blog">
-                            Blog
+                        <Link className="block underline py-4" to="/blogs">
+                            Blogs
                         </Link>
                     </li>
                     <li>
