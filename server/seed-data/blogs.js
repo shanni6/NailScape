@@ -9,7 +9,7 @@ module.exports = [
     },
     {
         content:
-            "<p>Watercolor techniques add a whimsical and artistic touch to nail art. Let's dive into the world of watercolor-inspired nail designs and discover how you can create stunning masterpieces on your fingertips.</p><h2>Watercolor Nail Art Techniques</h2><p>1.<strong>Blending Colors:</strong>Use a soft brush to blend different nail polish colors seamlessly, creating a watercolor effect on each nail.</p><p>2.<strong>Marbling:</strong>Drop different nail polish colors into a bowl of water and swirl them together. Dip your nails into the marbleized pattern for a unique watercolor look.</p><p>3.<strong>Gradient Ombre:</strong>Create a gradient ombre effect by blending two or more nail polish colors from the cuticle to the tip of the nails.</p>",
+            "<p>Watercolor techniques add a whimsical and artistic touch to nail art. Let's dive into the world of watercolor-inspired nail designs and discover how you can create stunning masterpieces on your fingertips.</p><h2>Watercolor Nail Art Techniques</h2><ol><li><strong>Blending Colors:</strong>Use a soft brush to blend different nail polish colors seamlessly, creating a watercolor effect on each nail.</li><li><strong>Marbling:</strong>Drop different nail polish colors into a bowl of water and swirl them together. Dip your nails into the marbleized pattern for a unique watercolor look.</li><li><strong>Gradient Ombre:</strong>Create a gradient ombre effect by blending two or more nail polish colors from the cuticle to the tip of the nails.</li></ol>",
         id: 2,
         image_url:
             "https://media.glamour.com/photos/64b04e09705ce50479e691e8/Untitled%20design%20.jpg",
