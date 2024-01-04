@@ -9,9 +9,9 @@ function Blog({ blog }) {
             </h2>
             <img
                 className="border-8 border-gray-50 h-36 mb-2 md:h-56 md:w-96 object-center object-cover shadow-lg w-52"
-                src={blog.image}
+                src={blog.image_url}
             />
-            <p>{blog.content.substring(0, 200)}...</p>
+            <p>{blog.intro}</p>
             <Link
                 className="bg-[url('assets/images/background-button.png')] bg-cover bg-no-repeat hover:underline p-2 text-gray-50 text-sm"
                 to={`/blogs/${blog.id}`}
@@ -20,7 +20,7 @@ function Blog({ blog }) {
             </Link>
             <p className="border-b border-t border-pink-400 flex gap-2 justify-center py-2 text-gray-600 text-xs w-3/4">
                 <FaRegCalendarAlt className="text-gray-400" />
-                {blog.timestamp.toLocaleDateString("en-CA", {
+                {new Date(blog.created_at).toLocaleDateString("en-CA", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
