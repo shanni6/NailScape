@@ -7,3 +7,9 @@ app.listen(process.env.PORT || 8080, () =>
 );
 
 app.use(cors());
+
+const blogRoutes = require("./routes/blog-routes");
+// const commentRoutes = require("./routes/comment-routes");
+
+app.use("/api/blogs", blogRoutes);
+// app.use("/api/comments", commentRoutes);
