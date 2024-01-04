@@ -19,7 +19,7 @@ NailScape targets nail art enthusiasts, DIY practitioners, and beauty bloggers. 
 3. **User Comments and Interaction**: Functionality for users to comment, like, and share posts.
 4. **Search and Filter**: Users can search for posts by tags, categories, or keywords.
 5. **Responsive Design**: A mobile-friendly user interface for access on any device.
-6. **Clean and Modern UI**: Using CSS modules for a streamlined, conflict-free styling.
+6. **Clean and Modern UI**: Using Tailwind CSS for a streamlined, conflict-free styling.
 
 ## Implementation
 
@@ -29,7 +29,7 @@ NailScape targets nail art enthusiasts, DIY practitioners, and beauty bloggers. 
 -   **Backend**: Express.js on Node.js for server-side logic.
 -   **Database**: MongoDB for storing blog content and user data.
 -   **Authentication**: Simple JWT-based auth for user accounts and interactions.
--   **Styling**: CSS Modules for component-specific styling.
+-   **Styling**: Tailwind CSS for styling.
 
 ### APIs
 
