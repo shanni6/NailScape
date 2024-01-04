@@ -11,7 +11,11 @@ function Blog({ blog }) {
                 className="border-8 border-gray-50 h-36 mb-2 md:h-56 md:w-96 object-center object-cover shadow-lg w-52"
                 src={blog.image_url}
             />
-            <p>{blog.intro}</p>
+            <p>
+                {blog.content
+                    .substring(0, blog.content.indexOf("</p>"))
+                    .replace("<p>", "")}
+            </p>
             <Link
                 className="bg-[url('assets/images/background-button.png')] bg-cover bg-no-repeat hover:underline p-2 text-gray-50 text-sm"
                 to={`/blogs/${blog.id}`}
