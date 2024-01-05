@@ -14,7 +14,7 @@ function Blog({ blog }) {
             <p>
                 {blog.content
                     .substring(0, blog.content.indexOf("</p>"))
-                    .replace("<p>", ""}
+                    .replace("<p>", "")}
             </p>
             <Link
                 className="bg-[url('assets/images/background-button.png')] bg-cover bg-no-repeat hover:underline p-2 text-gray-50 text-sm"
