@@ -30,7 +30,7 @@ function Blog() {
         fetchComments();
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         let isValid = true;
@@ -64,7 +64,21 @@ function Blog() {
         }
 
         if (isValid) {
-            console.log("Form Submitted");
+            try {
+                await axios.post(
+                    `${import.meta.env.VITE_API_URL}/blogs/${blog.id}/comments`,
+                    { comment: comment.value, name: name.value }
+                );
+
+                const { data } = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/blogs/${
+                        params.id
+                    }/comments`
+                );
+                setComments(data);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
@@ -181,6 +195,7 @@ function Blog() {
                                 blogId={blog.id}
                                 comment={comment}
                                 key={comment.id}
+                                setComments={setComments}
                             />
                         ))}
                 </div>
@@ -189,7 +204,7 @@ function Blog() {
     );
 }
 
-function Comment({ blogId, comment }) {
+function Comment({ blogId, comment, setComments }) {
     const [showCommentActions, setShowCommentActions] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -198,13 +213,19 @@ function Comment({ blogId, comment }) {
             <div className="absolute flex flex-col items-end right-1 top-3">
                 <FaEllipsisV
                     className="cursor-pointer text-lg text-gray-600"
-                    onClick={() => setShowCommentActions(!showCommentActions)}
+                    onClick={() => setShowCommentActions(true)}
                 />
                 {showCommentActions && (
-                    <div className="border flex flex-col mt-2 rounded shadow-md">
+                    <div
+                        className="border flex flex-col mt-2 rounded shadow-md"
+                        onClick={() => setShowCommentActions(false)}
+                    >
                         <button
                             className="bg-red-600 p-2 rounded text-sm text-white"
-                            onClick={() => setShowDeleteModal(true)}
+                            onClick={() => {
+                                setShowDeleteModal(true);
+                                document.body.style.overflow = "hidden";
+                            }}
                         >
                             Delete
                         </button>
@@ -214,6 +235,7 @@ function Comment({ blogId, comment }) {
                     <DeleteModal
                         blogId={blogId}
                         commentId={comment.id}
+                        setComments={setComments}
                         setShowDeleteModal={setShowDeleteModal}
                         type="comment"
                     />
