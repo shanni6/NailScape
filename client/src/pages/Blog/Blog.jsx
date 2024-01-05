@@ -67,7 +67,11 @@ function Blog() {
             try {
                 await axios.post(
                     `${import.meta.env.VITE_API_URL}/blogs/${blog.id}/comments`,
-                    { comment: comment.value, name: name.value }
+                    {
+                        blog_id: blog.id,
+                        comment: comment.value,
+                        name: name.value,
+                    }
                 );
 
                 const { data } = await axios.get(
