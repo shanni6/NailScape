@@ -69,10 +69,11 @@ function Blog() {
                     `${import.meta.env.VITE_API_URL}/blogs/${blog.id}/comments`,
                     {
                         blog_id: blog.id,
-                        comment: comment.value,
+                        content: comment.value,
                         name: name.value,
                     }
                 );
+                e.target.reset();
 
                 const { data } = await axios.get(
                     `${import.meta.env.VITE_API_URL}/blogs/${
@@ -217,7 +218,7 @@ function Comment({ blogId, comment, setComments }) {
             <div className="absolute flex flex-col items-end right-1 top-3">
                 <FaEllipsisV
                     className="cursor-pointer text-lg text-gray-600"
-                    onClick={() => setShowCommentActions(true)}
+                    onClick={() => setShowCommentActions(!showCommentActions)}
                 />
                 {showCommentActions && (
                     <div
