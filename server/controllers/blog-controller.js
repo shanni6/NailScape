@@ -48,8 +48,52 @@ const index = async (_req, res) => {
     }
 };
 
+const remove = async (req, res) => {
+    try {
+        const rowsDeleted = await knex("blog")
+            .where({ id: req.params.id })
+            .delete();
+
+        if (rowsDeleted === 0) {
+            return res
+                .status(404)
+                .json({ message: `Blog with ID ${req.params.id} not found` });
+        }
+
+        // No Content response
+        res.sendStatus(204);
+    } catch (error) {
+        res.status(500).json({
+            message: `Unable to delete blog: ${error}`,
+        });
+    }
+};
+
+const removeComment = async (req, res) => {
+    try {
+        const rowsDeleted = await knex("comment")
+            .where({ id: req.params.commentId })
+            .delete();
+
+        if (rowsDeleted === 0) {
+            return res.status(404).json({
+                message: `Comment with ID ${req.params.commentId} not found`,
+            });
+        }
+
+        // No Content response
+        res.sendStatus(204);
+    } catch (error) {
+        res.status(500).json({
+            message: `Unable to delete comment: ${error}`,
+        });
+    }
+};
+
 module.exports = {
     comments,
     findOne,
     index,
+    remove,
+    removeComment,
 };
