@@ -1,7 +1,7 @@
 const knex = require("knex")(require("../knexfile"));
 
 const addComment = async (req, res) => {
-    if (!req.body.comment || !req.body.name) {
+    if (!req.body.blog_id || !req.body.content || !req.body.name) {
         return res.status(400).json({
             message:
                 "Please provide comment and name for the comment in the request",
