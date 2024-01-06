@@ -6,9 +6,9 @@ exports.up = function (knex) {
     return knex.schema
         .createTable("blog", (table) => {
             table.increments("id").primary();
-            table.string("title").notNullable();
-            table.string("image_url").notNullable();
             table.string("content", 2500).notNullable();
+            table.string("image_url").notNullable();
+            table.string("title").notNullable();
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table
                 .timestamp("updated_at")

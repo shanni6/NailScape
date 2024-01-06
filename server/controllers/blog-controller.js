@@ -1,5 +1,27 @@
 const knex = require("knex")(require("../knexfile"));
 
+const add = async (req, res) => {
+    if (!req.body.content || !req.body.image_url || !req.body.title) {
+        return res.status(400).json({
+            message:
+                "Please provide content, image_url and title for the user in the request",
+        });
+    }
+
+    try {
+        const result = await knex("blog").insert(req.body);
+
+        const newBlogId = result[0];
+        const createdBlog = await knex("blog").where({ id: newBlogId });
+
+        res.status(201).json(createdBlog);
+    } catch (error) {
+        res.status(500).json({
+            message: `Unable to create new blog: ${error}`,
+        });
+    }
+};
+
 const addComment = async (req, res) => {
     if (!req.body.blog_id || !req.body.content || !req.body.name) {
         return res.status(400).json({
@@ -115,6 +137,7 @@ const removeComment = async (req, res) => {
 };
 
 module.exports = {
+    add,
     addComment,
     comments,
     findOne,
