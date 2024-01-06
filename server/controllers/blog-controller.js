@@ -4,7 +4,7 @@ const add = async (req, res) => {
     if (!req.body.content || !req.body.image_url || !req.body.title) {
         return res.status(400).json({
             message:
-                "Please provide content, image_url and title for the user in the request",
+                "Please provide content, image_url and title for the blog in the request",
         });
     }
 
@@ -14,7 +14,7 @@ const add = async (req, res) => {
         const newBlogId = result[0];
         const createdBlog = await knex("blog").where({ id: newBlogId });
 
-        res.status(201).json(createdBlog);
+        res.status(201).json(createdBlog[0]);
     } catch (error) {
         res.status(500).json({
             message: `Unable to create new blog: ${error}`,
@@ -136,6 +136,37 @@ const removeComment = async (req, res) => {
     }
 };
 
+const update = async (req, res) => {
+    if (!req.body.content || !req.body.image_url || !req.body.title) {
+        return res.status(400).json({
+            message:
+                "Please provide content, image_url and title for the blog in the request",
+        });
+    }
+
+    try {
+        const rowsUpdated = await knex("blog")
+            .where({ id: req.params.id })
+            .update(req.body);
+
+        if (rowsUpdated === 0) {
+            return res.status(404).json({
+                message: `Blog with ID ${req.params.id} not found`,
+            });
+        }
+
+        const updatedBlog = await knex("blog").where({
+            id: req.params.id,
+        });
+
+        res.json(updatedBlog[0]);
+    } catch (error) {
+        res.status(500).json({
+            message: `Unable to update blog with ID ${req.params.id}: ${error}`,
+        });
+    }
+};
+
 module.exports = {
     add,
     addComment,
@@ -144,4 +175,5 @@ module.exports = {
     index,
     remove,
     removeComment,
+    update,
 };
