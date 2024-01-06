@@ -18,7 +18,14 @@ function Blogs() {
 
     return (
         <section className="flex flex-col gap-8 md:px-16 px-4">
-            {blogs && blogs.map((blog) => <Blog blog={blog} key={blog.id} />)}
+            {blogs &&
+                blogs
+                    .sort(
+                        (blog1, blog2) =>
+                            new Date(blog2.created_at).getTime() -
+                            new Date(blog1.created_at).getTime()
+                    )
+                    .map((blog) => <Blog blog={blog} key={blog.id} />)}
         </section>
     );
 }

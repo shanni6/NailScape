@@ -4,6 +4,7 @@ import Blog from "./pages/Blog/Blog";
 import Blogs from "./pages/Blogs/Blogs";
 import Contact from "./pages/Contact/Contact";
 import Create from "./pages/Create/Create";
+import Edit from "./pages/Edit/Edit";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
@@ -16,6 +17,7 @@ function App() {
                     <Route element={<Navigate to="/blogs" />} path="/" />
                     <Route element={<Blogs />} path="/blogs" />
                     <Route element={<Blog />} path="/blogs/:id" />
+                    <Route element={<Edit />} path="/blogs/:id/edit" />
                     <Route element={<Create />} path="/blogs/create" />
                     <Route element={<Contact />} path="/contact" />
                 </Routes>

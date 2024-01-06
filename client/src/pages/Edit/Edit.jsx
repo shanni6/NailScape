@@ -1,16 +1,28 @@
-import "./Create.scss";
+import "./Edit.scss";
 import "./../../assets/css/quill.snow-custom.css";
-import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
 
-function Create() {
+function Edit() {
+    const [blog, setBlog] = useState({});
     const [contentClassName, setContentClassName] = useState(
         "border border-gray-400 focus-within:border-pink-600 rounded shadow-md"
     );
     const content = useRef(null);
     const navigate = useNavigate();
+    const params = useParams();
+
+    useEffect(() => {
+        const fetchBlog = async () => {
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_API_URL}/blogs/${params.id}`
+            );
+            setBlog(data);
+        };
+        fetchBlog();
+    }, [params.id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,8 +69,8 @@ function Create() {
 
         if (isValid) {
             try {
-                const { data } = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/blogs`,
+                const { data } = await axios.put(
+                    `${import.meta.env.VITE_API_URL}/blogs/${blog.id}`,
                     {
                         content: content.current.value,
                         image_url: imageUrl.value,
@@ -74,12 +86,13 @@ function Create() {
 
     return (
         <section className="px-4">
-            <h1 className="text-4xl text-purple-400">Create a Blog</h1>
+            <h1 className="text-4xl text-purple-400">Edit Blog</h1>
             <form className="flex flex-col gap-4 mt-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="title">Title:</label>
                     <input
                         className="border border-gray-400 focus:border-pink-600 outline-none px-2 py-1 rounded shadow-md"
+                        defaultValue={blog.title}
                         id="title"
                         type="text"
                     />
@@ -90,13 +103,14 @@ function Create() {
                         className={contentClassName}
                         ref={content}
                         theme="snow"
-                        value=""
+                        value={blog.content}
                     />
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="image-url">Image URL:</label>
                     <input
                         className="border border-gray-400 focus:border-pink-600 outline-none px-2 py-1 rounded shadow-md"
+                        defaultValue={blog.image_url}
                         id="image-url"
                         type="text"
                     />
@@ -111,4 +125,4 @@ function Create() {
     );
 }
 
-export default Create;
+export default Edit;

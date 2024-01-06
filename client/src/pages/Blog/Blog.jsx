@@ -1,8 +1,10 @@
 import "./Blog.scss";
 import { FaEllipsisV, FaRegCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Comment from "../../components/Comment/Comment";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 function Blog() {
@@ -26,9 +28,10 @@ function Blog() {
                 `${import.meta.env.VITE_API_URL}/blogs/${params.id}/comments`
             );
             setComments(data);
+            console.log();
         };
         fetchComments();
-    }, []);
+    }, [params.id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -106,9 +109,12 @@ function Blog() {
                                         setShowBlogActions(false);
                                     }}
                                 >
-                                    <button className="bg-white p-2 px-4 py-2 rounded-t">
+                                    <Link
+                                        className="bg-white p-2 px-4 py-2 rounded-t"
+                                        to={`/blogs/${blog.id}/edit`}
+                                    >
                                         Edit
-                                    </button>
+                                    </Link>
                                     <button
                                         className="bg-red-600 px-4 py-2 rounded-b text-white"
                                         onClick={() => {
@@ -194,7 +200,11 @@ function Blog() {
 
                 <h2 className="text-2xl mb-4 mt-8 text-purple-400">Comments</h2>
                 <div className="flex flex-col gap-8">
-                    {comments &&
+                    {comments.sort(
+                        (comment1, comment2) =>
+                            new Date(comment2.created_at).getTime() -
+                            new Date(comment1.created_at).getTime()
+                    ) &&
                         comments?.map((comment) => (
                             <Comment
                                 blogId={blog.id}
@@ -206,56 +216,6 @@ function Blog() {
                 </div>
             </section>
         </div>
-    );
-}
-
-function Comment({ blogId, comment, setComments }) {
-    const [showCommentActions, setShowCommentActions] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    return (
-        <article className="border flex flex-col gap-2 px-4 py-2 relative rounded shadow-md">
-            <div className="absolute flex flex-col items-end right-1 top-3">
-                <FaEllipsisV
-                    className="cursor-pointer text-lg text-gray-600"
-                    onClick={() => setShowCommentActions(!showCommentActions)}
-                />
-                {showCommentActions && (
-                    <div
-                        className="border flex flex-col mt-2 rounded shadow-md"
-                        onClick={() => setShowCommentActions(false)}
-                    >
-                        <button
-                            className="bg-red-600 p-2 rounded text-sm text-white"
-                            onClick={() => {
-                                setShowDeleteModal(true);
-                                document.body.style.overflow = "hidden";
-                            }}
-                        >
-                            Delete
-                        </button>
-                    </div>
-                )}
-                {showDeleteModal && (
-                    <DeleteModal
-                        blogId={blogId}
-                        commentId={comment.id}
-                        setComments={setComments}
-                        setShowDeleteModal={setShowDeleteModal}
-                        type="comment"
-                    />
-                )}
-            </div>
-            <h3 className="text-xl text-purple-400">{comment.name}</h3>
-            <p>{comment.content}</p>
-            <p className="text-gray-600 text-xs w-3/4">
-                {new Date(comment.created_at)?.toLocaleDateString("en-CA", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                })}
-            </p>
-        </article>
     );
 }
 
