@@ -1,15 +1,18 @@
 import "./Create.scss";
 import "./quill.snow-custom.css";
+import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
+import axios from "axios";
 import ReactQuill from "react-quill";
 
 function Create() {
-    const content = useRef(null);
     const [contentClassName, setContentClassName] = useState(
         "border border-gray-400 focus-within:border-pink-600 rounded shadow-md"
     );
+    const content = useRef(null);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const { "image-url": imageUrl, title } = e.target;
@@ -53,7 +56,19 @@ function Create() {
         }
 
         if (isValid) {
-            console.log("Form Submitted");
+            try {
+                const { data } = await axios.post(
+                    `${import.meta.env.VITE_API_URL}/blogs`,
+                    {
+                        content: content.current.value,
+                        image_url: imageUrl.value,
+                        title: title.value,
+                    }
+                );
+                navigate(`/blogs/${data.id}`);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
