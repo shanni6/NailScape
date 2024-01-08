@@ -1,4 +1,9 @@
+import "./Contact.scss";
+import { useNavigate } from "react-router-dom";
+
 function Contact() {
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -45,7 +50,8 @@ function Contact() {
         }
 
         if (isValid) {
-            console.log("Form Submitted");
+            alert("Thank you for contacting us!");
+            navigate("/");
         }
     };
 

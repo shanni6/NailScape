@@ -1,4 +1,4 @@
-# NailScape: A Personal Nail Art Blog
+# NailScape: Nail Art Blog
 
 ## Overview
 
